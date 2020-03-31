@@ -4,19 +4,127 @@
             "help": "WiFi SSID",
             "value": "\"SSID\""
         },
+		"echo-server-addr" : {
+            "help" : "IP address of echo server",
+            "value" : "\"echo.mbedcloudtesting.com\""
+        },
+        "echo-server-port" : {
+            "help" : "Port of echo server",
+            "value" : "7"
+        },
+        "echo-server-discard-port" : {
+            "help" : "Discard port of echo server",
+            "value" : "9"
+        },
+        "echo-server-port-tls" : {
+            "help" : "Echo port of echo server",
+            "value" : "2007"
+        },
+        "echo-server-discard-port-tls" : {
+            "help" : "Discard port of echo server",
+            "value" : "2009"
+        },
+        "wifi-secure-ssid": {
+            "help": "WiFi SSID for WPA2 secured network",
+            "value": "\"iPhone de moi\""
+        },
+        "wifi-unsecure-ssid": {
+            "help": "WiFi SSID for unsecure network",
+            "value": "\"iPhone de moi\""
+        },
         "wifi-password": {
             "help": "WiFi Password",
-            "value": "\"PASSWORD\""
-        }
+            "value": "\"7oz64tzcxs0cd\""
+        },
+        "wifi-secure-protocol": {
+            "help": "WiFi security protocol, valid values are WEP, WPA, WPA2, WPA/WPA2",
+            "value": "\"WPA2\""
+        },
+        "wifi-ch-secure": {
+            "help": "Channel number of secure SSID",
+            "value": 1
+        },
+        "wifi-ch-unsecure": {
+            "help": "Channel number of unsecure SSID",
+            "value": 2
+        },
+        "ap-mac-secure": {
+            "help": "BSSID of secure AP in form of AA:BB:CC:DD:EE:FF",
+            "value": "\"TOREPLACE\""
+        },
+        "ap-mac-unsecure": {
+            "help": "BSSID of unsecure AP in form of \"AA:BB:CC:DD:EE:FF\"",
+            "value": "\"TOREPLACE\""
+        },
+        "max-scan-size": {
+            "help": "How many networks may appear in Wifi scan result",
+            "value": 10
+        },
+       "bootloader-size": {
+            "help"      : "Helper macro to enable calculation of rom regions. target.header_offset and target.app_offset still needs to be calculated manually, though.",
+            "value"     : "(32*1024)",
+            "macro_name": "MBED_BOOTLOADER_SIZE"
+        }		
     },
+    "macros": [
+        "MBED_TRACE_MAX_LEVEL=TRACE_LEVEL_INFO",
+        "MBED_CLIENT_USER_CONFIG_FILE=\"mbed_cloud_client_user_config.h\"",
+        "MBED_CLOUD_CLIENT_USER_CONFIG_FILE=\"mbed_cloud_client_user_config.h\"",
+        "ARM_UC_USE_PAL_BLOCKDEVICE=1",
+        "PAL_PLATFORM_DEFINED_CONFIGURATION=\"mbedOS_SST.h\"",
+        "PAL_USER_DEFINED_CONFIGURATION=\"mbedOS_SST.h\""
+    ],	
     "target_overrides": {
         "*": {
-            "platform.stdio-convert-newlines": true
+            "target.features_add"                       : ["BOOTLOADER", "STORAGE"],
+            "platform.stdio-baud-rate"                  : 115200,
+            "platform.stdio-convert-newlines"           : true,
+            "platform.stdio-buffered-serial"            : true,
+            "platform.stdio-flush-at-exit"              : true,
+            "rtos.main-thread-stack-size"               : 5120,
+            "update-client.storage-locations"           : 1,
+            "mbed-trace.enable"                         : null,
+            "events.shared-stacksize"                   : 2048,
+            "nsapi.default-wifi-security"               : "WPA2",
+            "nsapi.default-wifi-ssid"                   : "\"iPhone de moi\"",
+            "nsapi.default-wifi-password"               : "\"7oz64tzcxs0cd\"",
+            "nsapi.default-cellular-apn"                : "\"WPA_WPA2\"",
+            "nsapi.default-cellular-sim-pin"            : null,
+            "nsapi.default-cellular-username"           : null,
+            "nsapi.default-cellular-password"           : null           
         },
         "DISCO_L475VG_IOT01A": {
-            "ism43362.provide-default": true
+            "ism43362.provide-default": true,
+            "target.macros_add"                         : ["MBEDTLS_USER_CONFIG_FILE=\"mbedTLSConfig_mbedOS.h\""],
+            "target.network-default-interface-type"     : "WIFI",
+            "target.bootloader_img"                     : "bootloader/mbed-bootloader-disco_l475vg_iot01a-external_kvstore-qspif-v4.1.1.bin",			
+            "target.header_offset"                      : "0x11000",
+            "target.app_offset"                         : "0x11400",
+            "target.components_add"                     : ["QSPIF", "WIFI_ISM43362"],
+            "bootloader-size"                           : "(36*1024)",			
+            "ism43362.read-thread-stack-size"           : 2048,
+            "mbed-client-pal.pal-max-frag-len"          : 1,
+            "mbed-client.sn-coap-max-blockwise-payload-size": 256,
+            "mbed-cloud-client.update-storage"          : "ARM_UCP_FLASHIAP_BLOCKDEVICE",
+            "storage.storage_type"                      : "FILESYSTEM",
+            "storage_filesystem.filesystem"             : "LITTLE",
+            "storage_filesystem.blockdevice"            : "QSPIF",
+            "storage_filesystem.external_size"          : "(1024 * 1024)",
+            "storage_filesystem.external_base_address"  : "(0)",
+            "storage_filesystem.rbp_internal_size"      : "(32 * 1024)",
+            "storage_filesystem.internal_base_address"  : "(MBED_ROM_START + MBED_BOOTLOADER_SIZE)",
+            "update-client.application-details"         : "(MBED_CONF_STORAGE_FILESYSTEM_INTERNAL_BASE_ADDRESS + MBED_CONF_STORAGE_FILESYSTEM_RBP_INTERNAL_SIZE)",
+            "update-client.bootloader-details"          : "0x800882c",
+            "update-client.firmware-header-version"     : "2",
+            "update-client.storage-address"             : "(MBED_CONF_STORAGE_FILESYSTEM_EXTERNAL_BASE_ADDRESS + MBED_CONF_STORAGE_FILESYSTEM_EXTERNAL_SIZE)",
+            "update-client.storage-locations"           : 1,
+            "update-client.storage-size"                : "((MBED_ROM_START + MBED_ROM_SIZE - APPLICATION_ADDR) * MBED_CONF_UPDATE_CLIENT_STORAGE_LOCATIONS)"			
         },
-        "DISCO_F413ZH": {
+      "DISCO_F413ZH": {
+            "target.network-default-interface-type": "WIFI",
+            "nsapi.default-wifi-ssid": "\"iPhone de moi\"",
+            "nsapi.default-wifi-password": "\"7oz64tzcxs0cd\"",
+            "nsapi.default-wifi-security": "WPA2",
             "ism43362.provide-default": true
         }
     }
