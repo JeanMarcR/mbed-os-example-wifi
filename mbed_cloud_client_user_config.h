@@ -35,7 +35,7 @@
 /* set download buffer size in bytes (min. 1024 bytes) */
 #define MBED_CLOUD_CLIENT_UPDATE_BUFFER          1024
 
-#define MBED_CLOUD_DEV_UPDATE_CERT
-#define MBED_CLOUD_DEV_UPDATE_ID
+//#define MBED_CLOUD_DEV_UPDATE_CERT
+//#define MBED_CLOUD_DEV_UPDATE_ID
 
 #endif /* MBED_CLOUD_CLIENT_USER_CONFIG_H */

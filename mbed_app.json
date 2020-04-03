@@ -26,15 +26,15 @@
         },
         "wifi-secure-ssid": {
             "help": "WiFi SSID for WPA2 secured network",
-            "value": "\"iPhone de moi\""
+            "value": "\"SSID\""
         },
         "wifi-unsecure-ssid": {
             "help": "WiFi SSID for unsecure network",
-            "value": "\"iPhone de moi\""
+            "value": "\"SSID\""
         },
         "wifi-password": {
             "help": "WiFi Password",
-            "value": "\"7oz64tzcxs0cd\""
+            "value": "\"PASSWORD\""
         },
         "wifi-secure-protocol": {
             "help": "WiFi security protocol, valid values are WEP, WPA, WPA2, WPA/WPA2",
@@ -86,8 +86,8 @@
             "mbed-trace.enable"                         : null,
             "events.shared-stacksize"                   : 2048,
             "nsapi.default-wifi-security"               : "WPA2",
-            "nsapi.default-wifi-ssid"                   : "\"iPhone de moi\"",
-            "nsapi.default-wifi-password"               : "\"7oz64tzcxs0cd\"",
+            "nsapi.default-wifi-ssid"                   : "\"SSID\"",
+            "nsapi.default-wifi-password"               : "\"PASSWORD\"",
             "nsapi.default-cellular-apn"                : "\"WPA_WPA2\"",
             "nsapi.default-cellular-sim-pin"            : null,
             "nsapi.default-cellular-username"           : null,
@@ -122,8 +122,8 @@
         },
       "DISCO_F413ZH": {
             "target.network-default-interface-type": "WIFI",
-            "nsapi.default-wifi-ssid": "\"iPhone de moi\"",
-            "nsapi.default-wifi-password": "\"7oz64tzcxs0cd\"",
+            "nsapi.default-wifi-ssid": "\"SSID\"",
+            "nsapi.default-wifi-password": "\"PASSWORD\"",
             "nsapi.default-wifi-security": "WPA2",
             "ism43362.provide-default": true
         }
